@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <script src="./robot-arm.js"></script>
+        <script>
+            var canvas = document.getElementById("canvas");
+            var robotArm = new RobotArm(canvas);
+            
+            robotArm.randomLevel( 1, 8);
+            robotArm.speed = 500;
+            
+            var move = true;
+            for( i =1; i <= 6; i++){
+                if(move === true){
+                    robotArm.grab();
+                    if(robotArm.scan() !== null) {
+                        for(j =1; j <= i; j++) robotArm.moveRight();
+                            robotArm.drop();
+                        for(j =1; j <= i; j++) robotArm.moveLeft();
+                    } else move = false;
+                }
+            }
+
+            
+            robotArm.run();
+        </script>
+    </body>
+</html>
